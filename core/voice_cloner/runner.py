@@ -12,6 +12,13 @@ from vocoder import inference as vocoder
 
 text = "Have you been a naughty boy?"
 
+enc_model_fpath = Path("saved_models/default/encoder.pt")
+syn_model_fpath = Path("saved_models/default/synthesizer.pt")
+voc_model_fpath = Path("saved_models/default/vocoder.pt")
+
+sample_1 = "samples/1320_00000.mp3"
+in_fpath = Path(sample_1)
+
 if torch.cuda.is_available():
     device_id = torch.cuda.current_device()
     gpu_properties = torch.cuda.get_device_properties(device_id)
@@ -26,21 +33,12 @@ if torch.cuda.is_available():
 else:
     print("Using CPU for inference.\n")
 
-enc_model_fpath = Path("saved_models/default/encoder.pt")
-syn_model_fpath = Path("saved_models/default/synthesizer.pt")
-voc_model_fpath = Path("saved_models/default/vocoder.pt")
-
-sample_1 = "samples/1320_00000.mp3"
-
 ## Load the models one by one.
 print("Preparing the encoder, the synthesizer and the vocoder...")
 ensure_default_models(Path("saved_models"))
 encoder.load_model(enc_model_fpath)
 synthesizer = Synthesizer(syn_model_fpath)
 vocoder.load_model(voc_model_fpath)
-
-
-in_fpath = Path(sample_1)
 
 ## Computing the embedding
 preprocessed_wav = encoder.preprocess_wav(in_fpath)
@@ -74,7 +72,6 @@ vocoder.load_model(voc_model_fpath)
 # Synthesizing the waveform is fairly straightforward. Remember that the longer the
 # spectrogram, the more time-efficient the vocoder.
 generated_wav = vocoder.infer_waveform(spec)
-
 
 ## Post-generation
 # There's a bug with sounddevice that makes the audio cut one second earlier, so we
