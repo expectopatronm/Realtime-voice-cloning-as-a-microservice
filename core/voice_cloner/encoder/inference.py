@@ -1,8 +1,8 @@
-from encoder.params_data import *
-from encoder.model import SpeakerEncoder
-from encoder.audio import preprocess_wav   # We want to expose this function from here
+from core.voice_cloner.encoder.params_data import *
+from core.voice_cloner.encoder.model import SpeakerEncoder
+from core.voice_cloner.encoder.audio import preprocess_wav   # We want to expose this function from here
 from matplotlib import cm
-from encoder import audio
+from core.voice_cloner.encoder import audio
 from pathlib import Path
 import numpy as np
 import torch

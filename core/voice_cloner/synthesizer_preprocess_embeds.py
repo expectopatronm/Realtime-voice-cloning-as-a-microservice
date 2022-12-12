@@ -1,4 +1,4 @@
-from synthesizer.preprocess import create_embeddings
+from core.voice_cloner.synthesizer.preprocess import create_embeddings
 from utils.argutils import print_args
 from pathlib import Path
 import argparse

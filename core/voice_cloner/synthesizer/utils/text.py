@@ -1,5 +1,5 @@
-from synthesizer.utils.symbols import symbols
-from synthesizer.utils import cleaners
+from core.voice_cloner.synthesizer.utils.symbols import symbols
+from core.voice_cloner.synthesizer.utils import cleaners
 import re
 
 

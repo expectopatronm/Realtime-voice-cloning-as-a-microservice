@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import librosa
-import vocoder.hparams as hp
+import core.voice_cloner.vocoder.hparams as hp
 from scipy.signal import lfilter
 import soundfile as sf
 

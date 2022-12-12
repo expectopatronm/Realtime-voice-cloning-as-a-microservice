@@ -7,14 +7,14 @@ import torch.nn.functional as F
 from torch import optim
 from torch.utils.data import DataLoader
 
-from synthesizer import audio
-from synthesizer.models.tacotron import Tacotron
-from synthesizer.synthesizer_dataset import SynthesizerDataset, collate_synthesizer
-from synthesizer.utils import ValueWindow, data_parallel_workaround
-from synthesizer.utils.plot import plot_spectrogram
-from synthesizer.utils.symbols import symbols
-from synthesizer.utils.text import sequence_to_text
-from vocoder.display import *
+from core.voice_cloner.synthesizer import audio
+from core.voice_cloner.synthesizer.models.tacotron import Tacotron
+from core.voice_cloner.synthesizer.synthesizer_dataset import SynthesizerDataset, collate_synthesizer
+from core.voice_cloner.synthesizer.utils import ValueWindow, data_parallel_workaround
+from core.voice_cloner.synthesizer.utils.plot import plot_spectrogram
+from core.voice_cloner.synthesizer.utils.symbols import symbols
+from core.voice_cloner.synthesizer.utils.text import sequence_to_text
+from core.voice_cloner.vocoder.display import *
 
 
 def np_now(x: torch.Tensor): return x.detach().cpu().numpy()

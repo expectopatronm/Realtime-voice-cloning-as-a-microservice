@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from synthesizer.hparams import hparams
-from synthesizer.train import train
-from utils.argutils import print_args
+from core.voice_cloner.synthesizer.hparams import hparams
+from core.voice_cloner.synthesizer.train import train
+from core.voice_cloner.utils.argutils import print_args
 import argparse
 
 

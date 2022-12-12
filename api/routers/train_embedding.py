@@ -5,6 +5,8 @@ from fastapi.responses import HTMLResponse
 
 from config import settings
 
+from core.runner import synthesize_speech
+
 router = APIRouter(
     prefix=f"{settings.BASE_URL}",
     tags=["Train Embedding on Custom Voice"],
@@ -33,5 +35,8 @@ async def train_embedding_on_custom_voice(input: Input):
                         <body>
                         </body>
                     </html>"""
+
+    print("I've been pressed")
+    synthesize_speech()
 
     return HTMLResponse(content=html_content)

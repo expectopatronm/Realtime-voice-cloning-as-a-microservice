@@ -1,5 +1,5 @@
-from synthesizer.preprocess import preprocess_dataset
-from synthesizer.hparams import hparams
+from core.voice_cloner.synthesizer.preprocess import preprocess_dataset
+from core.voice_cloner.synthesizer.hparams import hparams
 from utils.argutils import print_args
 from pathlib import Path
 import argparse
