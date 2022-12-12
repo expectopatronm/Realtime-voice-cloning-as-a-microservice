@@ -1,7 +1,12 @@
 from pydantic import BaseModel
 
-from fastapi import APIRouter
-from fastapi.responses import HTMLResponse
+import io
+import soundfile as sf
+
+import numpy as np
+
+from fastapi import APIRouter, File
+from fastapi.responses import Response
 
 from config import settings
 
@@ -18,9 +23,9 @@ class Input(BaseModel):
 
 
 @router.post("/train-embedding-on-custom-voice")
-async def train_embedding_on_custom_voice(input: Input):
+async def train_embedding_on_custom_voice(audio: bytes = File(...)):
     """Trains TTS Embedding on custom voice input.
-
+    
     Args:
         Input: Audio File.
 
@@ -28,15 +33,14 @@ async def train_embedding_on_custom_voice(input: Input):
         Output: html response.
     """
 
+    audio_file, sample_rate = sf.read(io.BytesIO(audio))
 
-    html_content = """<html>
-                        <h3>Hello World</h3>
-                        <br />
-                        <body>
-                        </body>
-                    </html>"""
+    generated_wav, sample_rate = synthesize_speech(audio_file)
 
-    print("I've been pressed")
-    synthesize_speech()
+    # Output as memory file
+    file_format = "WAV"
+    memory_file = io.BytesIO( )
+    memory_file.name = "generated_audio.wav"
+    sf.write(memory_file, generated_wav.astype(np.float32), sample_rate, format=file_format)
 
-    return HTMLResponse(content=html_content)
+    return Response(content=memory_file.getvalue())

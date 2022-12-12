@@ -1,8 +1,6 @@
 from pathlib import Path
 
-import librosa
 import numpy as np
-import soundfile as sf
 import torch
 
 from core.voice_cloner.encoder import inference as encoder
@@ -39,16 +37,17 @@ synthesizer = Synthesizer(syn_model_fpath)
 vocoder.load_model(voc_model_fpath)
 
 
-def synthesize_speech():
+def synthesize_speech(audio_file):
 
     text = "Have you been a naughty boy?"
 
     ## Computing the embedding
-    preprocessed_wav = encoder.preprocess_wav(in_fpath)
+    preprocessed_wav = encoder.preprocess_wav(audio_file)
     print("Loaded file succesfully")
 
     # Then we derive the embedding.
     embed = encoder.embed_utterance(preprocessed_wav)
+    print(type(embed))
     print("Created the embedding")
 
     # The synthesizer works in batch, so you need to put your data in a list or numpy array
@@ -64,7 +63,6 @@ def synthesize_speech():
     ## Generating the waveform
     print("Synthesizing the waveform:")
 
-
     # Synthesizing the waveform is fairly straightforward. Remember that the longer the
     # spectrogram, the more time-efficient the vocoder.
     generated_wav = vocoder.infer_waveform(spec)
@@ -77,8 +75,10 @@ def synthesize_speech():
     # Trim excess silences to compensate for gaps in spectrograms (issue #53)
     generated_wav = encoder.preprocess_wav(generated_wav)
 
-    # Save it on the disk
-    filename = "demo_output.wav"
-    print(generated_wav.dtype)
-    sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
-    print("\nSaved output as %s\n\n" % filename)
+    # # Save it on the disk
+    # filename = "demo_output.wav"
+    # print(generated_wav.dtype)
+    # sf.write(filename, generated_wav.astype(np.float32), synthesizer.sample_rate)
+    # print("\nSaved output as %s\n\n" % filename)
+
+    return generated_wav, synthesizer.sample_rate
