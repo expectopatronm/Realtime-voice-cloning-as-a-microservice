@@ -6,7 +6,7 @@ from pydantic import BaseSettings
 
 class Settings(BaseSettings):
 
-    BASE_URL = "/service/dataset-generator"
+    BASE_URL = "/service/voice-cloning"
 
 
 # Instantiate all settings once so it can be imported from other modules
