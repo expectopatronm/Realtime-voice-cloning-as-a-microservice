@@ -3,6 +3,7 @@ venv/
 
 # Python generated
 *.pyc
+*__pycache__
 
 # Saved Pytorch models
 *.pth
