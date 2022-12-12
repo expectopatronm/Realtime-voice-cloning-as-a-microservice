@@ -5,8 +5,6 @@ from fastapi.responses import HTMLResponse
 
 from config import settings
 
-from core.voice_cloner import runner
-
 router = APIRouter(
     prefix=f"{settings.BASE_URL}",
     tags=["Train Embedding on Custom Voice"],

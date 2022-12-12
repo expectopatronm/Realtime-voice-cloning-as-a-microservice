@@ -12,11 +12,11 @@ from vocoder import inference as vocoder
 
 text = "Have you been a naughty boy?"
 
-enc_model_fpath = Path("saved_models/default/encoder.pt")
-syn_model_fpath = Path("saved_models/default/synthesizer.pt")
-voc_model_fpath = Path("saved_models/default/vocoder.pt")
+enc_model_fpath = Path("core/voice_cloner/saved_models/default/encoder.pt")
+syn_model_fpath = Path("core/voice_cloner/saved_models/default/synthesizer.pt")
+voc_model_fpath = Path("core/voice_cloner/saved_models/default/vocoder.pt")
 
-sample_1 = "samples/1320_00000.mp3"
+sample_1 = "core/voice_cloner/samples/1320_00000.mp3"
 in_fpath = Path(sample_1)
 
 if torch.cuda.is_available():
@@ -35,7 +35,7 @@ else:
 
 ## Load the models one by one.
 print("Preparing the encoder, the synthesizer and the vocoder...")
-ensure_default_models(Path("saved_models"))
+ensure_default_models(Path("core/voice_cloner/saved_models"))
 encoder.load_model(enc_model_fpath)
 synthesizer = Synthesizer(syn_model_fpath)
 vocoder.load_model(voc_model_fpath)
