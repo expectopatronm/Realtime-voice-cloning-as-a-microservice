@@ -30,7 +30,7 @@ async def train_embedding_on_custom_voice(audio: bytes = File(...)):
         Input: Audio File.
 
     Returns:
-        Output: html response.
+        Output: Bytes.
     """
 
     audio_file, sample_rate = sf.read(io.BytesIO(audio))
