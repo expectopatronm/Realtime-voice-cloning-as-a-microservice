@@ -9,4 +9,3 @@ venv/
 *.pth
 
 core/voice_cloner/saved_models/*
-core/voice_cloner/samples/*
